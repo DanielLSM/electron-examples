@@ -17,6 +17,10 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^5.0.7"
+    "electron": "^5.0.1"
+  },
+  "dependencies": {
+    "electron-rebuild": "^1.8.5",
+    "zerorpc": "git+https://github.com/0rpc/zerorpc-node.git"
   }
 }
