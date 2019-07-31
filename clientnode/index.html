@@ -2,24 +2,112 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Hello World!</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="./index.js"></script>
+  <script>
+    function ddlpopulate(ddl, arr) {
+      ddl.options.length = 0;
+      iteropt = document.createElement('option');
+      iteropt.innerHTML = iteropt.value = '';
+      ddl.appendChild(iteropt);
+      for (i = 0; i < arr.length; i++) {
+        iteropt = document.createElement('option');
+        iteropt.innerHTML = iteropt.value = arr[i]; //.text
+        ddl.appendChild(iteropt);
+      }
+    }
+    function ddlcascade(upper, lower, ht) {
+      objUpper = document.getElementById(upper);
+      objLower = document.getElementById(lower);
+      if (objUpper.options.length == 0) {
+        ddlpopulate(objUpper, Object.keys(ht));
+      }
+      objUpper.onchange = function () {
+        ddlpopulate(objLower, ht[objUpper.value]);
+      }
+    }
+    //If using jQuery, use $(document).ready, or find and call other onload handlers
+    window.onload = function () {
+      hyper01 = { 'Hangar-1': ['Aircraft-1', 'Aircraft-2', 'Aircraft-3', 'Aircraft-4'], 'Hangar-2': ['Aircraft-1', 'Aircraft-2', 'Aircraft-3', 'Aircraft-4'] };
+      ddlcascade('ddl01', 'ddl02', hyper01);
+    }
+  </script>
 </head>
 
 <body>
-  <h1>Hello World!</h1>
-  We are using Node.js <span id="node-version"></span>,
+  Using Node.js <span id="node-version"></span>,
   Chromium <span id="chrome-version"></span>,
   and Electron <span id="electron-version"></span>.
 
   <!-- You can also require other files to run in this process -->
-  <h1>Hello Calculator!</h1>
-  <p>Input something like <code>1 + 1</code>.</p>
-  <p>This calculator supports <code>+-*/^()</code>,
-    whitespaces, and integers and floating numbers.</p>
-  <input id="formula" value="1 + 2.0 * 3.1 / (4 ^ 5.6)"></input>
-  <div id="result"></div>
-  <script src="./index.js"></script>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>ReMAP WP6 Planning Tool</h1>
+      <p>Powered by Python</p>
+      <p>Rendered by HTML and JavaScript</p>
+      <img style="width:20%" src="images/remap.png" />
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-xs-4">
+        <form>
+          <select id="ddl01">
+          </select>
+          <select id="ddl02">
+          </select>
+        </form>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:30%" src="images/tower.png" />
+        <br>
+        <button class="btn btn-info"><a style="color:white" onclick="server_plan_opportunities()">Plan
+            Checks</a></button>
+
+      </div>
+      <div class="col-xs-4">
+        <img style="width:30%" src="images/process.png" />
+        <br>
+        <button class="btn btn-info"><a style="color:white" onclick="server_preprocess_tasks()">Preprocess
+            Tasks</a></button>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:30%" src="images/hangar.png" />
+        <br>
+        <button class="btn btn-info"><a style="color:white" onclick="server_plan_tasks()">Plan Tasks</a></button>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:40%;padding:5px" src="images/excel.png" />
+        <br>
+        <button class="btn btn-warning"><a style="color:white;" onclick="server_save_checks_xlsx()">Save tasks to
+            xlsx</a></button>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:30%" src="images/excel.png" />
+        <br>
+        <button class="btn btn-info"><a style="color:white" onclick="server_save_tasks_xlsx()">Save tasks to
+            xlsx</a></button>
+
+      </div>
+      <div class="col-xs-4">
+        <img style="width:30%" src="images/zip.png" />
+        <br>
+        <button class="btn btn-info"><a style="color:white" onclick="server_save_checks()">Save Checks</a></button>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:30%" src="images/zip.png" />
+        <br>
+        <button class="btn btn-info"><a style="color:white" onclick="server_load_checks()">Load Checks</a></button>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:40%;padding:5px" src="images/zip.png" />
+        <br>
+        <button class="btn btn-warning"><a style="color:white;" onclick="server_save_tasks()">Save Tasks</a></button>
+      </div>
+      <div class="col-xs-4">
+        <img style="width:40%;padding:5px" src="images/zip.png" />
+        <br>
+        <button class="btn btn-warning"><a style="color:white;" onclick="server_load_tasks()">Load Tasks</a></button>
+      </div>
 
 </body>
 

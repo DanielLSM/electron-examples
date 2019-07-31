@@ -2,6 +2,9 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
+//ICON
+// https://medium.com/fantageek/changing-electron-app-icon-acf26906c5ad
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -21,7 +24,7 @@ function createWindow() {
   mainWindow.loadFile('clientnode/index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -57,28 +60,28 @@ app.on('activate', function () {
 // PYTHON PART
 ///////////////////////////////////////////////////
 
-let pyProc = null
-let pyPort = null
+// let pyProc = null
+// let pyPort = null
 
-const selectPort = () => {
-  pyPort = 4242
-  return pyPort
-}
+// const selectPort = () => {
+//   pyPort = 4242
+//   return pyPort
+// }
 
-const createPyProc = () => {
-  let port = '' + selectPort()
-  let script = path.join(__dirname, 'pyserver', 'rest.py')
-  pyProc = require('child_process').spawn('python', [script, port])
-  if (pyProc != null) {
-    console.log('child process success')
-  }
-}
+// const createPyProc = () => {
+//   let port = '' + selectPort()
+//   let script = path.join(__dirname, 'pyserver', 'rest.py')
+//   pyProc = require('child_process').spawn('python', [script, port])
+//   if (pyProc != null) {
+//     console.log('child process success')
+//   }
+// }
 
-const exitPyProc = () => {
-  pyProc.kill()
-  pyProc = null
-  pyPort = null
-}
+// const exitPyProc = () => {
+//   pyProc.kill()
+//   pyProc = null
+//   pyPort = null
+// }
 
-app.on('ready', createPyProc)
-app.on('will-quit', exitPyProc)
+// app.on('ready', createPyProc)
+// app.on('will-quit', exitPyProc)
