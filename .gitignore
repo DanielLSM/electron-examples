@@ -105,4 +105,4 @@ venv.bak/
 
 node_modules
 .vscode
-*/images
+# */images
